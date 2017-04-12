@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+            android:id="@+id/am_progressbar_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:direction="left"
+            app:max_progress="100"
+            app:outside_color="@color/colorPrimary"
+            app:outside_radius="40dp"
+            app:progress="0"
+            app:progress_width="2dp" />
+
+        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+            android:id="@+id/am_progressbar_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            app:direction="top"
+            app:max_progress="100"
+            app:outside_color="#8c0e88"
+            app:outside_radius="55dp"
+            app:progress="0"
+            app:progress_width="4dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+            android:id="@+id/am_progressbar_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:direction="right"
+            app:max_progress="100"
+            app:outside_color="#d91f1f"
+            app:outside_radius="80dp"
+            app:progress="0"
+            app:progress_width="8dp" />
+
+        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+            android:id="@+id/am_progressbar_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:direction="bottom"
+            app:max_progress="100"
+            app:outside_color="#19e126"
+            app:outside_radius="70dp"
+            app:progress="0"
+            app:progress_width="6dp" />
+    </LinearLayout>
+
+</LinearLayout>
