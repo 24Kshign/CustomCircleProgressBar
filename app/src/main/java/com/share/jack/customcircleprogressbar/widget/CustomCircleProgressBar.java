@@ -127,7 +127,7 @@ public class CustomCircleProgressBar extends View {
         RectF oval = new RectF(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);  //用于定义的圆弧的形状和大小的界限
         canvas.drawArc(oval, DirectionEnum.getDegree(direction), 360 * (progress / maxProgress), false, paint);  //根据进度画圆弧
 
-        //第二步第三步:画圆环内百分比文字
+        //第三步:画圆环内百分比文字
         rect = new Rect();
         paint.setColor(progressTextColor);
         paint.setTextSize(progressTextSize);
@@ -149,14 +149,14 @@ public class CustomCircleProgressBar extends View {
         if (mode == MeasureSpec.EXACTLY) {
             width = size;
         } else {
-            width = (int) (2 * outsideRadius) + 20;
+            width = (int) ((2 * outsideRadius) + progressWidth);
         }
         size = MeasureSpec.getSize(heightMeasureSpec);
         mode = MeasureSpec.getMode(heightMeasureSpec);
         if (mode == MeasureSpec.EXACTLY) {
             height = size;
         } else {
-            height = (int) (2 * outsideRadius) + 20;
+            height = (int) ((2 * outsideRadius) + progressWidth);
         }
         setMeasuredDimension(width, height);
     }
