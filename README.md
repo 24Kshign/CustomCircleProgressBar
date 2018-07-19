@@ -3,7 +3,7 @@
 ![真机上没有这么卡顿的效果](http://upload-images.jianshu.io/upload_images/490111-f74f09fddab84c6b.gif?imageMogr2/auto-orient/strip)
 
 简单自定义了一个比较通用的圆形进度条，像上图所示的可以定义圆的半径，进度颜色，宽度，中间字体等信息。下面我就一步一步来为大家讲解：
->####1、首先我们先要找出有哪些属性需要自定义的，进度条颜色、进度颜色、整个进度条的半径、进度的宽度、进度条内文字颜色及大小、最大进度、当前进度，后来我加了一个方向的属性，方向表示进度从哪里开始（默认有四个方向，上左下右），确定好之后我们就在attrs中定义出来：
+>#### 1、首先我们先要找出有哪些属性需要自定义的，进度条颜色、进度颜色、整个进度条的半径、进度的宽度、进度条内文字颜色及大小、最大进度、当前进度，后来我加了一个方向的属性，方向表示进度从哪里开始（默认有四个方向，上左下右），确定好之后我们就在attrs中定义出来：
 	
 	 <declare-styleable name="CustomCircleProgressBar">
         <attr name="outside_color" format="color" />
@@ -21,7 +21,7 @@
             <enum name="bottom" value="3" />
         </attr>
     </declare-styleable>
->####2、然后在自定义**View**的构造方法中获取一下这些值：
+>#### 2、然后在自定义**View**的构造方法中获取一下这些值：
 	
 	public CustomCircleProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -40,7 +40,7 @@
 
         paint = new Paint();
     }
->####3、接下来我们要重写onMeasure方法，让其可以自适应你的设置：
+>#### 3、接下来我们要重写onMeasure方法，让其可以自适应你的设置：
 	
 	@Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -63,7 +63,7 @@
         }
         setMeasuredDimension(width, height);
     }
->####4、这两块就不多说了，相信大多数看官应该都知道，接下来我们来分析要画些什么？怎么画？首先肯定是画最底层的那个圆环了，给画笔设置空心属性，然后设置线的宽度，就可以画一个圆环了：
+>#### 4、这两块就不多说了，相信大多数看官应该都知道，接下来我们来分析要画些什么？怎么画？首先肯定是画最底层的那个圆环了，给画笔设置空心属性，然后设置线的宽度，就可以画一个圆环了：
 	
 	@Override
     protected void onDraw(Canvas canvas) {
@@ -79,7 +79,7 @@
     }
 ![](http://upload-images.jianshu.io/upload_images/490111-f1650614c8e2523a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
->####5、然后我们接着画外面的进度，外面进度就是一段弧，根据我们获取的进度和总进度来画这段弧，画弧需要用到`canvas.drawArc()`这个方法，这个方法有两个重载方法：
+>#### 5、然后我们接着画外面的进度，外面进度就是一段弧，根据我们获取的进度和总进度来画这段弧，画弧需要用到`canvas.drawArc()`这个方法，这个方法有两个重载方法：
 `drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter,Paint paint)`
 `drawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle,boolean useCenter,Paint paint)`
 其实，可以看作是一个方法，因为`RectF`这个东西呢就是由`left top right bottom`构成的，那`RectF`这玩意儿到底什么东西呢，我也不知道，那就去看源码呗：
@@ -121,7 +121,7 @@
     RectF oval = new RectF(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);  //用于定义的圆弧的形状和大小的界限
     canvas.drawArc(oval, CustomCircleProgressBar.DirectionEnum.getDegree(direction), 360 * (progress / maxProgress), true, paint);  //根据进度画圆弧
 ![连接圆心](http://upload-images.jianshu.io/upload_images/490111-fbb8b084df3a37c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
->6、接下来就是画圆环内的百分比文字了，可能有的人就说，画文字嘛，那不是很简单，直接`drawText`方法画不就好了，要什么值就传什么呗！大兄弟别急撒，下面给大家看看直接画文字的效果：
+>#### 6、接下来就是画圆环内的百分比文字了，可能有的人就说，画文字嘛，那不是很简单，直接`drawText`方法画不就好了，要什么值就传什么呗！大兄弟别急撒，下面给大家看看直接画文字的效果：
 	
 	paint.setColor(progressTextColor);
     paint.setTextSize(progressTextSize);
@@ -170,9 +170,9 @@
 
 好了，现在进度和文字都画出来了，个人觉得就这样直接展示在用户眼前显得有点生硬，有没有什么办法让它的进度从零开始跑动画到我们要设置的进度值呢，答案是肯定的咯，这里我们可以用属性动画来实现，前面几篇博客我们有讲到属性动画的知识，如果你还没有看过的话，请移步：
 
-####[Android自定义view之属性动画熟悉](http://www.jianshu.com/p/50d974db7bc5)
+#### [Android自定义view之属性动画熟悉](http://www.jianshu.com/p/50d974db7bc5)
 
-####[Android自定义view之属性动画初见](http://www.jianshu.com/p/0e10a6ed80dc)
+#### [Android自定义view之属性动画初见](http://www.jianshu.com/p/0e10a6ed80dc)
 
 这里我们使用的是`ValueAnimator`，通过监听动画改变进度的值来设置圆环的进度：
 
@@ -190,7 +190,7 @@
         animator.setInterpolator(new LinearInterpolator());   //动画匀速
         animator.start();
     }
-到此就完成了自定义的原型进度条了。源码已上传至[Github](https://github.com/Jakemesdg/CustomCircleProgressBar)，有需要的同学可以下载下来看看，欢迎**Star，Fork**
-#####同时感谢以上引用到博客的主人，感谢！！！
+到此就完成了自定义的原型进度条了。
 
-![公众号：Android技术经验分享](http://upload-images.jianshu.io/upload_images/490111-8c1cdb3bd9dfd604.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![公众号：Android先生](http://upload-images.jianshu.io/upload_images/490111-8c1cdb3bd9dfd604.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
